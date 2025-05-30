@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.saslab.ui.MainController">
+
+  <top>
+    <MenuBar>
+      <Menu text="File">
+        <MenuItem text="Esci" onAction="#handleExit"/>
+      </Menu>
+    </MenuBar>
+  </top>
+
+  <center>
+    <TabPane fx:id="tabPane">
+
+      <Tab text="Ricette" closable="false">
+        <VBox spacing="10">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+          </padding>
+          <TableView fx:id="recipeTableView">
+            <columns>
+              <TableColumn text="Nome" fx:id="nameColumn"/>
+              <TableColumn text="Stato" fx:id="stateColumn"/>
+            </columns>
+          </TableView>
+          <Button fx:id="newRecipeButton" text="Nuova Ricetta" onAction="#handleNewRecipe"/>
+        </VBox>
+      </Tab>
+
+      <Tab text="Menù" closable="false">
+        <VBox spacing="10">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+          </padding>
+          <Button fx:id="newMenuButton" text="Nuovo Menù" onAction="#handleNewMenu"/>
+        </VBox>
+      </Tab>
+
+      <Tab text="Eventi" closable="false">
+        <VBox spacing="10">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+          </padding>
+          <Button fx:id="newEventButton" text="Nuovo Evento" onAction="#handleNewEvent"/>
+        </VBox>
+      </Tab>
+
+      <Tab text="Compiti" closable="false">
+        <VBox spacing="10">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+          </padding>
+          <Button fx:id="assignTasksButton" text="Assegna Compiti" onAction="#handleAssignTasks"/>
+        </VBox>
+      </Tab>
+
+    </TabPane>
+  </center>
+
+</BorderPane>
