@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.saslab.ui.TaskManagementController"
+            prefHeight="1000.0" prefWidth="1400.0">
+
+  <top>
+    <VBox spacing="10.0">
+      <padding>
+        <Insets bottom="10.0" left="15.0" right="15.0" top="15.0"/>
+      </padding>
+      
+      <HBox alignment="CENTER_LEFT" spacing="15.0">
+        <Label text="Gestione Compiti della Cucina" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Separator orientation="VERTICAL"/>
+        <Label fx:id="planStatusLabel" style="-fx-font-size: 12px; -fx-font-weight: bold;"/>
+      </HBox>
+      
+      <!-- Statistiche -->
+      <HBox spacing="30.0" alignment="CENTER_LEFT" style="-fx-background-color: #f0f0f0; -fx-padding: 10;">
+        <VBox alignment="CENTER">
+          <Label fx:id="totalTasksLabel" style="-fx-font-weight: bold;"/>
+          <Label text="Totale" style="-fx-font-size: 10px;"/>
+        </VBox>
+        <VBox alignment="CENTER">
+          <Label fx:id="assignedTasksLabel" style="-fx-font-weight: bold;"/>
+          <Label text="Assegnati" style="-fx-font-size: 10px;"/>
+        </VBox>
+        <VBox alignment="CENTER">
+          <Label fx:id="completedTasksLabel" style="-fx-font-weight: bold;"/>
+          <Label text="Completati" style="-fx-font-size: 10px;"/>
+        </VBox>
+        <VBox alignment="CENTER">
+          <Label fx:id="tasksWithIssuesLabel" style="-fx-font-weight: bold;"/>
+          <Label text="Con Problemi" style="-fx-font-size: 10px;"/>
+        </VBox>
+        <VBox alignment="CENTER" spacing="5.0">
+          <ProgressBar fx:id="completionProgressBar" prefWidth="150.0"/>
+          <Label text="Completamento" style="-fx-font-size: 10px;"/>
+        </VBox>
+      </HBox>
+    </VBox>
+  </top>
+
+  <center>
+    <TabPane tabClosingPolicy="UNAVAILABLE">
+      
+      <!-- Tab Creazione Compiti -->
+      <Tab text="Crea Compiti">
+        <VBox spacing="20.0">
+          <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+          </padding>
+
+          <!-- Aggiunta compito extra -->
+          <VBox spacing="15.0">
+            <Label text="Aggiungi Compito Extra" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            
+            <GridPane hgap="15.0" vgap="15.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="100.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="300.0"/>
+                <ColumnConstraints halignment="RIGHT" minWidth="100.0" prefWidth="100.0"/>
+                <ColumnConstraints minWidth="150.0" prefWidth="150.0"/>
+              </columnConstraints>
+
+              <Label text="Descrizione:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+              <TextArea fx:id="taskDescriptionArea" promptText="Descrizione del compito extra" 
+                        prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="3"/>
+
+              <Label text="Tipo:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+              <ComboBox fx:id="taskTypeComboBox" prefWidth="150.0" 
+                        GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+              <Label text="Priorità:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+              <ComboBox fx:id="taskPriorityComboBox" prefWidth="150.0" 
+                        GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+              <Button fx:id="addTaskButton" text="Aggiungi Compito" 
+                      onAction="#handleAddTask"
+                      style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+            </HBox>
+          </VBox>
+
+          <Separator/>
+
+          <!-- Lista compiti disponibili -->
+          <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+            <Label text="Compiti Disponibili" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            
+            <TableView fx:id="availableTasksTable" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="taskDescriptionColumn" text="Descrizione" prefWidth="300.0"/>
+                <TableColumn fx:id="taskTypeColumn" text="Tipo" prefWidth="100.0"/>
+                <TableColumn fx:id="taskPriorityColumn" text="Priorità" prefWidth="100.0"/>
+                <TableColumn fx:id="taskStatusColumn" text="Stato" prefWidth="120.0"/>
+              </columns>
+            </TableView>
+
+            <!-- Controlli per suddivisione -->
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+              <Label text="Suddividi in parti:"/>
+              <Spinner fx:id="splitPartsSpinner" prefWidth="80.0"/>
+              <Button fx:id="splitTaskButton" text="Suddividi Compito" 
+                      onAction="#handleSplitTask"/>
+            </HBox>
+          </VBox>
+        </VBox>
+      </Tab>
+
+      <!-- Tab Assegnazione -->
+      <Tab text="Assegna Compiti">
+        <VBox spacing="20.0">
+          <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+          </padding>
+
+          <!-- Form assegnazione -->
+          <VBox spacing="15.0">
+            <Label text="Assegna Compito a Cuoco" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            
+            <GridPane hgap="15.0" vgap="15.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="120.0" prefWidth="120.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="200.0"/>
+                <ColumnConstraints halignment="RIGHT" minWidth="120.0" prefWidth="120.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="200.0"/>
+              </columnConstraints>
+
+              <Label text="Cuoco:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+              <ComboBox fx:id="cookComboBox" prefWidth="250.0" 
+                        GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+              <Label text="ID Turno:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+              <TextField fx:id="shiftIdField" promptText="es. SHIFT_MORNING" 
+                         GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+              <Label text="Tempo Stimato (min):" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+              <Spinner fx:id="timeEstimateSpinner" prefWidth="100.0" 
+                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+              <Label text="Quantità:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+              <Spinner fx:id="quantitySpinner" prefWidth="100.0" 
+                       GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+              <Button fx:id="assignTaskButton" text="Assegna Compito" 
+                      onAction="#handleAssignTask"
+                      style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+            </HBox>
+          </VBox>
+
+          <Separator/>
+
+          <!-- Lista assegnazioni -->
+          <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+            <Label text="Compiti Assegnati" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            
+            <TableView fx:id="assignmentsTable" VBox.vgrow="ALWAYS">
+              <columns>
+                <TableColumn fx:id="assignmentTaskColumn" text="Compito" prefWidth="250.0"/>
+                <TableColumn fx:id="assignmentCookColumn" text="Cuoco" prefWidth="150.0"/>
+                <TableColumn fx:id="assignmentShiftColumn" text="Turno" prefWidth="120.0"/>
+                <TableColumn fx:id="assignmentTimeColumn" text="Tempo (min)" prefWidth="100.0"/>
+                <TableColumn fx:id="assignmentStatusColumn" text="Stato" prefWidth="120.0"/>
+              </columns>
+            </TableView>
+
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+              <Button fx:id="reassignTaskButton" text="Riassegna" 
+                      onAction="#handleReassignTask"/>
+              <Button fx:id="markCompletedButton" text="Segna Completato" 
+                      onAction="#handleMarkCompleted"
+                      style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+              <Button fx:id="reportIssueButton" text="Segnala Problema" 
+                      onAction="#handleReportIssue"
+                      style="-fx-background-color: #FF9800; -fx-text-fill: white;"/>
+            </HBox>
+          </VBox>
+        </VBox>
+      </Tab>
+
+      <!-- Tab Controllo Piano -->
+      <Tab text="Controllo Piano">
+        <VBox spacing="20.0">
+          <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+          </padding>
+
+          <!-- Stato piano -->
+          <VBox spacing="15.0">
+            <Label text="Stato del Piano" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            
+            <VBox spacing="10.0" style="-fx-background-color: #f5f5f5; -fx-padding: 15;">
+              <Label text="Il piano dei compiti coordina tutte le attività di preparazione della cucina."/>
+              <Label text="• IN MODIFICA: È possibile aggiungere, modificare e assegnare compiti"/>
+              <Label text="• CONFERMATO: Il piano è bloccato, i cuochi possono vedere le loro assegnazioni"/>
+            </VBox>
+
+            <HBox spacing="20.0" alignment="CENTER_LEFT">
+              <Button fx:id="confirmPlanButton" text="Conferma Piano" 
+                      onAction="#handleConfirmPlan" prefWidth="150.0"
+                      style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+              
+              <Button fx:id="resetPlanButton" text="Reset Piano" 
+                      onAction="#handleResetPlan" prefWidth="150.0"
+                      style="-fx-background-color: #F44336; -fx-text-fill: white;"/>
+            </HBox>
+          </VBox>
+
+          <Separator/>
+
+          <!-- Informazioni aggiuntive -->
+          <VBox spacing="15.0">
+            <Label text="Istruzioni d'Uso" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            
+            <VBox spacing="8.0">
+              <Label text="1. Crea i compiti extra necessari (es. pane, grissini, preparazioni non nel menù)"/>
+              <Label text="2. Suddividi i compiti grandi in parti più piccole se necessario"/>
+              <Label text="3. Assegna ogni compito a un cuoco specificando turno, tempo e quantità"/>
+              <Label text="4. Verifica che tutti i compiti critici siano assegnati"/>
+              <Label text="5. Conferma il piano per bloccare le modifiche"/>
+              <Label text="6. Monitora l'avanzamento durante l'esecuzione"/>
+            </VBox>
+          </VBox>
+
+          <Separator/>
+
+          <!-- Validazioni -->
+          <VBox spacing="15.0">
+            <Label text="Validazioni del Piano" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            
+            <VBox spacing="5.0">
+              <CheckBox text="Tutti i compiti critici sono assegnati" disable="true"/>
+              <CheckBox text="Non ci sono conflitti di orario" disable="true"/>
+              <CheckBox text="I carichi di lavoro sono bilanciati" disable="true"/>
+              <CheckBox text="Le sequenze di preparazione sono corrette" disable="true"/>
+            </VBox>
+          </VBox>
+        </VBox>
+      </Tab>
+
+    </TabPane>
+  </center>
+
+  <bottom>
+    <VBox spacing="10.0">
+      <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0"/>
+      </padding>
+      
+      <!-- Messaggi di errore/successo -->
+      <Label fx:id="errorLabel" wrapText="true" maxWidth="1300.0" visible="false"/>
+      <Label fx:id="statusLabel" wrapText="true" maxWidth="1300.0" visible="false"/>
+      
+      <!-- Pulsanti -->
+      <HBox alignment="CENTER_RIGHT" spacing="15.0">
+        <Button fx:id="refreshButton" text="Aggiorna" onAction="#handleRefresh" 
+                prefWidth="80.0"/>
+        
+        <Button fx:id="closeButton" text="Chiudi" onAction="#handleClose" 
+                prefWidth="80.0" cancelButton="true"/>
+      </HBox>
+    </VBox>
+  </bottom>
+
+</BorderPane>
