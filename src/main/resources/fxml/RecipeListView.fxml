@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.saslab.ui.RecipeListController"
+            prefHeight="600.0" prefWidth="800.0">
+
+  <top>
+    <HBox alignment="CENTER_LEFT" spacing="15.0">
+      <padding>
+        <Insets bottom="10.0" left="15.0" right="15.0" top="15.0"/>
+      </padding>
+      <Label text="Ricettario" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+      <Separator orientation="VERTICAL"/>
+      <Label fx:id="recipeCountLabel" text="0 ricette"/>
+    </HBox>
+  </top>
+
+  <center>
+    <VBox spacing="15.0">
+      <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+      </padding>
+
+      <!-- Barra di ricerca e filtri -->
+      <HBox spacing="15.0" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField" promptText="Cerca ricette..." 
+                   prefWidth="300.0" HBox.hgrow="ALWAYS"/>
+        <ComboBox fx:id="tagFilterComboBox" promptText="Filtra per tag" 
+                  prefWidth="150.0"/>
+        <ComboBox fx:id="stateFilterComboBox" promptText="Stato" 
+                  prefWidth="120.0"/>
+        <Button fx:id="searchButton" text="Cerca" onAction="#handleSearch"/>
+        <Button fx:id="clearFiltersButton" text="Pulisci Filtri" onAction="#handleClearFilters"/>
+      </HBox>
+
+      <!-- Tabella ricette -->
+      <TableView fx:id="recipesTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="nameColumn" text="Nome" prefWidth="250.0"/>
+          <TableColumn fx:id="ownerColumn" text="Proprietario" prefWidth="150.0"/>
+          <TableColumn fx:id="timeColumn" text="Tempo (min)" prefWidth="100.0"/>
+          <TableColumn fx:id="tagsColumn" text="Tags" prefWidth="200.0"/>
+          <TableColumn fx:id="stateColumn" text="Stato" prefWidth="100.0"/>
+        </columns>
+        <placeholder>
+          <Label text="Nessuna ricetta trovata"/>
+        </placeholder>
+      </TableView>
+
+      <!-- Dettagli ricetta selezionata -->
+      <TitledPane fx:id="detailsPane" text="Dettagli Ricetta" expanded="false">
+        <VBox spacing="10.0">
+          <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+          </padding>
+          
+          <HBox spacing="10.0">
+            <Label text="Descrizione:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="descriptionLabel" wrapText="true" maxWidth="600.0"/>
+          </HBox>
+          
+          <HBox spacing="10.0">
+            <Label text="Porzioni base:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="portionsLabel"/>
+          </HBox>
+          
+          <VBox spacing="5.0">
+            <Label text="Ingredienti:" style="-fx-font-weight: bold;"/>
+            <ListView fx:id="ingredientsList" prefHeight="100.0"/>
+          </VBox>
+          
+          <HBox spacing="15.0">
+            <Button fx:id="viewFullRecipeButton" text="Visualizza Completa" 
+                    onAction="#handleViewFullRecipe"/>
+            <Button fx:id="copyRecipeButton" text="Crea Copia" 
+                    onAction="#handleCopyRecipe"/>
+            <Button fx:id="useInMenuButton" text="Usa in Menù" 
+                    onAction="#handleUseInMenu"/>
+          </HBox>
+        </VBox>
+      </TitledPane>
+
+    </VBox>
+  </center>
+
+  <bottom>
+    <HBox alignment="CENTER_RIGHT" spacing="15.0">
+      <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0"/>
+      </padding>
+      
+      <Button fx:id="closeButton" text="Chiudi" onAction="#handleClose" 
+              prefWidth="80.0" cancelButton="true"/>
+    </HBox>
+  </bottom>
+
+</BorderPane>
