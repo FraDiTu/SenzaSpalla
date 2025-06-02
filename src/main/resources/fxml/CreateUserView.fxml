@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.saslab.ui.CreateUserController"
+            prefHeight="600.0" prefWidth="450.0">
+
+  <center>
+    <ScrollPane fitToWidth="true" fitToHeight="true">
+      <VBox alignment="TOP_CENTER" spacing="15.0">
+        <padding>
+          <Insets bottom="20.0" left="30.0" right="30.0" top="20.0"/>
+        </padding>
+
+        <!-- Titolo -->
+        <Label text="Crea Nuovo Utente" textAlignment="CENTER">
+          <font>
+            <Font name="System Bold" size="18.0"/>
+          </font>
+        </Label>
+
+        <!-- Separatore -->
+        <Separator prefWidth="300.0"/>
+
+        <!-- Form -->
+        <GridPane hgap="10.0" vgap="15.0" alignment="CENTER">
+          <columnConstraints>
+            <ColumnConstraints halignment="RIGHT" minWidth="120.0" prefWidth="120.0"/>
+            <ColumnConstraints hgrow="ALWAYS" minWidth="200.0" prefWidth="200.0"/>
+          </columnConstraints>
+
+          <!-- Campi base -->
+          <Label text="Nome *:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+          <TextField fx:id="nameField" promptText="Nome completo" 
+                     GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+          <Label text="Email *:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+          <TextField fx:id="emailField" promptText="indirizzo@email.com" 
+                     GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+          <Label text="Password *:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+          <PasswordField fx:id="passwordField" promptText="Minimo 6 caratteri" 
+                         GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+          <Label text="Conferma Password *:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+          <PasswordField fx:id="confirmPasswordField" promptText="Ripeti password" 
+                         GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+          <Label text="Tipo Utente *:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+          <ComboBox fx:id="userTypeComboBox" prefWidth="200.0" 
+                    GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+          <!-- Campi specifici -->
+          <Label fx:id="specializationLabel" text="Specializzazione:" 
+                 GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+          <TextField fx:id="specializationField" 
+                     GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+          <Label fx:id="departmentLabel" text="Dipartimento:" 
+                 GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+          <TextField fx:id="departmentField" 
+                     GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+          <Label fx:id="serviceRoleLabel" text="Ruolo Servizio:" 
+                 GridPane.columnIndex="0" GridPane.rowIndex="7"/>
+          <TextField fx:id="serviceRoleField" 
+                     GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+
+          <Label fx:id="experienceLabel" text="Anni Esperienza:" 
+                 GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+          <Spinner fx:id="experienceSpinner" prefWidth="100.0" 
+                   GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+
+        </GridPane>
+
+        <!-- Messaggio di errore/successo -->
+        <Label fx:id="errorLabel" wrapText="true" textAlignment="CENTER" 
+               maxWidth="350.0" visible="false"/>
+
+        <!-- Nota campi obbligatori -->
+        <Label text="* Campi obbligatori" style="-fx-font-size: 10px; -fx-text-fill: #666666;"/>
+
+      </VBox>
+    </ScrollPane>
+  </center>
+
+  <bottom>
+    <HBox alignment="CENTER_RIGHT" spacing="15.0">
+      <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+      </padding>
+      
+      <Button fx:id="createButton" text="Crea Utente" onAction="#handleCreateUser" 
+              prefWidth="100.0" defaultButton="true"
+              style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+      
+      <Button fx:id="cancelButton" text="Annulla" onAction="#handleCancel" 
+              prefWidth="80.0" cancelButton="true"/>
+    </HBox>
+  </bottom>
+
+</BorderPane>
