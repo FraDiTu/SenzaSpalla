@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/20"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.saslab.ui.EventEditController"
+            prefHeight="900.0" prefWidth="1200.0">
+
+  <top>
+    <HBox alignment="CENTER_LEFT" spacing="15.0">
+      <padding>
+        <Insets bottom="10.0" left="15.0" right="15.0" top="15.0"/>
+      </padding>
+      <Label text="Gestione Evento" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+      <Separator orientation="VERTICAL"/>
+      <Label fx:id="statusLabel" style="-fx-font-size: 12px;"/>
+    </HBox>
+  </top>
+
+  <center>
+    <ScrollPane fitToWidth="true" fitToHeight="true">
+      <TabPane tabClosingPolicy="UNAVAILABLE">
+        
+        <!-- Tab Informazioni Base -->
+        <Tab text="Informazioni Base">
+          <VBox spacing="20.0">
+            <padding>
+              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <!-- Informazioni evento -->
+            <VBox spacing="15.0">
+              <Label text="Dettagli Evento" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+              
+              <GridPane hgap="15.0" vgap="15.0">
+                <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" minWidth="120.0" prefWidth="120.0"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="200.0"/>
+                  <ColumnConstraints halignment="RIGHT" minWidth="120.0" prefWidth="120.0"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="200.0"/>
+                </columnConstraints>
+
+                <Label text="Nome Evento *:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="eventNameField" promptText="Nome dell'evento" 
+                           GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="3"/>
+
+                <Label text="Location *:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="locationField" promptText="Luogo dell'evento" 
+                           GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3"/>
+
+                <Label text="Data Inizio *:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Data Fine *:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                <DatePicker fx:id="endDatePicker" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+                <Label text="Ospiti Attesi:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                <Spinner fx:id="expectedGuestsSpinner" prefWidth="100.0" 
+                         GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                <Label text="Cliente ID:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+                <TextField fx:id="clientIdField" promptText="ID del cliente" 
+                           GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+
+                <Label text="Note:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                <TextArea fx:id="notesArea" promptText="Note sull'evento" 
+                          prefRowCount="3" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.columnSpan="3"/>
+              </GridPane>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Assegnazione Chef -->
+            <VBox spacing="15.0">
+              <Label text="Assegnazione Chef" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+              
+              <HBox spacing="15.0" alignment="CENTER_LEFT">
+                <Label text="Chef:"/>
+                <ComboBox fx:id="chefComboBox" prefWidth="300.0"/>
+                <Button fx:id="assignChefButton" text="Assegna" onAction="#handleAssignChef"/>
+              </HBox>
+              
+              <Label fx:id="assignedChefLabel" visible="false" 
+                     style="-fx-text-fill: green; -fx-font-weight: bold;"/>
+            </VBox>
+          </VBox>
+        </Tab>
+
+        <!-- Tab Servizi -->
+        <Tab text="Servizi">
+          <VBox spacing="20.0">
+            <padding>
+              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <!-- Aggiunta servizio -->
+            <VBox spacing="15.0">
+              <Label text="Aggiungi Servizio" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+              
+              <GridPane hgap="15.0" vgap="15.0">
+                <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" minWidth="100.0" prefWidth="100.0"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="150.0"/>
+                  <ColumnConstraints halignment="RIGHT" minWidth="100.0" prefWidth="100.0"/>
+                  <ColumnConstraints hgrow="ALWAYS" minWidth="150.0"/>
+                </columnConstraints>
+
+                <Label text="Data:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <DatePicker fx:id="serviceDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Tipo:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <ComboBox fx:id="serviceTypeComboBox" prefWidth="150.0" 
+                          GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                <Label text="Inizio:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <HBox spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Spinner fx:id="serviceStartHourSpinner" prefWidth="60.0"/>
+                  <Label text=":"/>
+                  <Spinner fx:id="serviceStartMinuteSpinner" prefWidth="60.0"/>
+                </HBox>
+
+                <Label text="Fine:" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <HBox spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <Spinner fx:id="serviceEndHourSpinner" prefWidth="60.0"/>
+                  <Label text=":"/>
+                  <Spinner fx:id="serviceEndMinuteSpinner" prefWidth="60.0"/>
+                </HBox>
+
+                <Label text="Ospiti:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Spinner fx:id="serviceGuestsSpinner" prefWidth="100.0" 
+                         GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Note:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                <TextArea fx:id="serviceNotesArea" prefRowCount="2" 
+                          GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+              </GridPane>
+
+              <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <Button fx:id="addServiceButton" text="Aggiungi Servizio" 
+                        onAction="#handleAddService"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+              </HBox>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Lista servizi -->
+            <VBox spacing="15.0" VBox.vgrow="ALWAYS">
+              <Label text="Servizi dell'Evento" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+              
+              <TableView fx:id="servicesTable" VBox.vgrow="ALWAYS">
+                <columns>
+                  <TableColumn fx:id="serviceDateColumn" text="Data" prefWidth="100.0"/>
+                  <TableColumn fx:id="serviceTimeColumn" text="Orario" prefWidth="120.0"/>
+                  <TableColumn fx:id="serviceTypeColumn" text="Tipo" prefWidth="120.0"/>
+                  <TableColumn fx:id="serviceGuestsColumn" text="Ospiti" prefWidth="80.0"/>
+                </columns>
+              </TableView>
+
+              <Button fx:id="removeServiceButton" text="Rimuovi Servizio Selezionato" 
+                      onAction="#handleRemoveService"/>
+            </VBox>
+          </VBox>
+        </Tab>
+
+        <!-- Tab Gestione -->
+        <Tab text="Gestione">
+          <VBox spacing="20.0">
+            <padding>
+              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+            </padding>
+
+            <Label text="Controllo Stato Evento" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+            <VBox spacing="15.0">
+              <Label text="Azioni disponibili in base allo stato dell'evento:"/>
+              
+              <GridPane hgap="20.0" vgap="15.0">
+                <columnConstraints>
+                  <ColumnConstraints prefWidth="200.0"/>
+                  <ColumnConstraints prefWidth="300.0"/>
+                </columnConstraints>
+
+                <Button fx:id="startEventButton" text="Avvia Evento" 
+                        onAction="#handleStartEvent" prefWidth="180.0"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label text="Passa l'evento da BOZZA a IN CORSO" 
+                       GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Button fx:id="completeEventButton" text="Completa Evento" 
+                        onAction="#handleCompleteEvent" prefWidth="180.0"
+                        style="-fx-background-color: #2196F3; -fx-text-fill: white;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label text="Segna l'evento come COMPLETATO" 
+                       GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Button fx:id="cancelEventButton" text="Annulla Evento" 
+                        onAction="#handleCancelEvent" prefWidth="180.0"
+                        style="-fx-background-color: #F44336; -fx-text-fill: white;"
+                        GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Label text="Annulla l'evento (con motivazione)" 
+                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+              </GridPane>
+            </VBox>
+
+            <Separator/>
+
+            <!-- Informazioni stato -->
+            <VBox spacing="10.0">
+              <Label text="Informazioni Stato" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+              
+              <VBox spacing="5.0" style="-fx-background-color: #f5f5f5; -fx-padding: 10;">
+                <Label text="• BOZZA: Evento creato, può essere modificato ed eliminato"/>
+                <Label text="• IN CORSO: Evento avviato, non può più essere eliminato"/>
+                <Label text="• COMPLETATO: Evento terminato con successo"/>
+                <Label text="• ANNULLATO: Evento cancellato"/>
+              </VBox>
+            </VBox>
+          </VBox>
+        </Tab>
+
+      </TabPane>
+    </ScrollPane>
+  </center>
+
+  <bottom>
+    <VBox spacing="10.0">
+      <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="10.0"/>
+      </padding>
+      
+      <!-- Messaggi di errore/successo -->
+      <Label fx:id="errorLabel" wrapText="true" maxWidth="1100.0" visible="false"/>
+      
+      <!-- Pulsanti -->
+      <HBox alignment="CENTER_RIGHT" spacing="15.0">
+        <Button fx:id="saveButton" text="Salva" onAction="#handleSave" 
+                prefWidth="80.0" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        
+        <Button fx:id="cancelButton" text="Chiudi" onAction="#handleCancel" 
+                prefWidth="80.0" cancelButton="true"/>
+      </HBox>
+    </VBox>
+  </bottom>
+
+</BorderPane>
