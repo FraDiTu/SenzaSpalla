@@ -1,0 +1,107 @@
+[ {
+  "nome" : "Pasta al Pomodoro",
+  "descrizione" : "Classica pasta italiana con sugo di pomodoro fresco",
+  "proprietario" : {
+    "type" : "chef",
+    "username" : "chef1",
+    "password" : "password",
+    "nome" : "Francesco",
+    "cognome" : "Di Tullio",
+    "email" : "chef@catering.it",
+    "specializzazione" : "Cucina Italiana",
+    "nomeCompleto" : "Francesco Di Tullio"
+  },
+  "autore" : "Chef Francesco",
+  "ingredienti" : [ {
+    "ingrediente" : {
+      "nome" : "Pomodoro",
+      "unitaMisura" : "g"
+    },
+    "quantita" : 400.0
+  } ],
+  "istruzioniAnticipo" : [ "Preparare il sugo di pomodoro", "Cuocere la pasta" ],
+  "istruzioniUltimo" : [ "Mantecare la pasta con il sugo" ],
+  "tempoPreparazione" : 30,
+  "quantitaRisultante" : 0.0,
+  "unitaMisuraRisultato" : null,
+  "tags" : [ "vegetariano", "pasta", "italiano" ],
+  "pubblicata" : true,
+  "id" : 1749551906999,
+  "numeroPortate" : 4,
+  "visible" : true
+}, {
+  "nome" : "Risotto ai Funghi",
+  "descrizione" : "Cremoso risotto con funghi porcini",
+  "proprietario" : {
+    "type" : "chef",
+    "username" : "chef1",
+    "password" : "password",
+    "nome" : "Francesco",
+    "cognome" : "Di Tullio",
+    "email" : "chef@catering.it",
+    "specializzazione" : "Cucina Italiana",
+    "nomeCompleto" : "Francesco Di Tullio"
+  },
+  "autore" : "Chef Francesco",
+  "ingredienti" : [ ],
+  "istruzioniAnticipo" : [ "Preparare il brodo vegetale", "Pulire e tagliare i funghi" ],
+  "istruzioniUltimo" : [ "Tostare il riso e mantecarlo" ],
+  "tempoPreparazione" : 45,
+  "quantitaRisultante" : 0.0,
+  "unitaMisuraRisultato" : null,
+  "tags" : [ "risotto", "italiano", "funghi" ],
+  "pubblicata" : true,
+  "id" : 1749551907029,
+  "numeroPortate" : 6,
+  "visible" : true
+}, {
+  "nome" : "Tiramisù",
+  "descrizione" : "Dolce tradizionale italiano al caffè",
+  "proprietario" : {
+    "type" : "cuoco",
+    "username" : "cuoco1",
+    "password" : "password",
+    "nome" : "Claudia",
+    "cognome" : "La Rocca",
+    "email" : "cuoco@catering.it",
+    "anniEsperienza" : 5,
+    "nomeCompleto" : "Claudia La Rocca"
+  },
+  "autore" : "Nonna Rosa",
+  "ingredienti" : [ ],
+  "istruzioniAnticipo" : [ "Preparare il caffè e farlo raffreddare", "Preparare la crema al mascarpone", "Assemblare gli strati" ],
+  "istruzioniUltimo" : [ "Spolverare con cacao amaro" ],
+  "tempoPreparazione" : 60,
+  "quantitaRisultante" : 0.0,
+  "unitaMisuraRisultato" : null,
+  "tags" : [ "dolce", "caffè", "mascarpone" ],
+  "pubblicata" : true,
+  "id" : 1749551907033,
+  "numeroPortate" : 8,
+  "visible" : true
+}, {
+  "nome" : "Scaloppine",
+  "descrizione" : "cucina il pollo e poi metto il vino",
+  "proprietario" : {
+    "type" : "chef",
+    "username" : "chef1",
+    "password" : "password",
+    "nome" : "Francesco",
+    "cognome" : "Di Tullio",
+    "email" : "chef@catering.it",
+    "specializzazione" : "Cucina Italiana",
+    "nomeCompleto" : "Francesco Di Tullio"
+  },
+  "autore" : null,
+  "ingredienti" : [ ],
+  "istruzioniAnticipo" : [ ],
+  "istruzioniUltimo" : [ ],
+  "tempoPreparazione" : 20,
+  "quantitaRisultante" : 0.0,
+  "unitaMisuraRisultato" : null,
+  "tags" : [ ],
+  "pubblicata" : true,
+  "id" : 1749552549703,
+  "numeroPortate" : 4,
+  "visible" : true
+} ]
