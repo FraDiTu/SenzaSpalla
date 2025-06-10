@@ -1,0 +1,24 @@
+MENU CATERING
+=============
+
+Data generazione: Tue Jun 10 12:52:53 CEST 2025
+Chef: Francesco Di Tullio
+
+=== Cena di natale ===
+
+
+--- Antipasto ---
+
+--- Primi ---
+• Risotto ai Funghi
+
+--- Secondi ---
+• Pasta al Pomodoro
+
+--- Dolci ---
+• Tiramisù
+
+
+
+---
+Generato da Cat & Ring - Sistema di Gestione Catering
